@@ -1,0 +1,203 @@
+/* Guide PDF styling for weasyprint */
+
+/* Page setup */
+@page {
+    size: A4;
+    margin: 25mm;
+    @top-center {
+        content: "Bulletproof PDF Generation in Go";
+        font-size: 8pt;
+        color: #666;
+        border-bottom: 0.5pt solid #ddd;
+        padding-bottom: 4pt;
+        width: 100%;
+    }
+    @bottom-center {
+        content: "Page " counter(page) " of " counter(pages);
+        font-size: 8pt;
+        color: #666;
+        border-top: 0.5pt solid #ddd;
+        padding-top: 4pt;
+        width: 100%;
+    }
+    @bottom-left {
+        content: "[Your Name] | v${VERSION}";
+        font-size: 7pt;
+        color: #999;
+    }
+    @bottom-right {
+        content: "https://github.com/yourusername/pdfgen";
+        font-size: 7pt;
+        color: #999;
+    }
+}
+
+/* Chapter breaks */
+h1 { page-break-before: always; }
+h1:first-of-type { page-break-before: avoid; }
+
+/* Typography */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.6;
+    color: #1a1a2e;
+    font-size: 11pt;
+}
+
+h1 { color: #1a1a2e; font-size: 24pt; border-bottom: 2pt solid #1a1a2e; padding-bottom: 8pt; margin-top: 0; }
+h2 { color: #1a1a2e; font-size: 16pt; margin-top: 24pt; border-bottom: 1pt solid #ddd; padding-bottom: 4pt; }
+h3 { color: #333; font-size: 13pt; margin-top: 18pt; }
+h4 { color: #444; font-size: 11pt; margin-top: 14pt; }
+
+p { margin: 8pt 0; text-align: justify; hyphens: auto; }
+
+/* Code */
+code {
+    background: #f4f4f4;
+    border: 0.5pt solid #e0e0e0;
+    border-radius: 3pt;
+    padding: 1pt 5pt;
+    font-size: 0.9em;
+    font-family: "SF Mono", "Fira Code", "Monaco", monospace;
+}
+
+pre {
+    background: #1e1e1e;
+    color: #d4d4d4;
+    border-radius: 6pt;
+    padding: 12pt;
+    overflow: auto;
+    page-break-inside: avoid;
+    border: 1pt solid #333;
+}
+
+pre code {
+    background: transparent;
+    border: none;
+    padding: 0;
+    color: inherit;
+    font-size: 0.85em;
+    line-height: 1.5;
+}
+
+/* Tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12pt 0;
+    page-break-inside: avoid;
+}
+
+th, td {
+    border: 0.5pt solid #e0e0e0;
+    padding: 6pt 10pt;
+    text-align: left;
+    font-size: 9.5pt;
+}
+
+th {
+    background: #f5f5f5;
+    font-weight: 600;
+    color: #444;
+}
+
+tr:nth-child(even) td { background: #fafafa; }
+
+/* Lists */
+ul, ol { margin: 8pt 0 8pt 24pt; }
+li { margin: 4pt 0; }
+
+/* Blockquotes */
+blockquote {
+    border-left: 3pt solid #1a1a2e;
+    padding-left: 12pt;
+    margin: 12pt 0;
+    color: #555;
+    font-style: italic;
+}
+
+/* Horizontal rule */
+hr { border: none; border-top: 1pt solid #ddd; margin: 24pt 0; }
+
+/* Links */
+a { color: #1a1a2e; text-decoration: underline; }
+a:hover { color: #333; }
+
+/* TOC */
+#TOC { page-break-after: always; }
+#TOC ul { list-style: none; padding-left: 0; }
+#TOC li { margin: 4pt 0; }
+#TOC a { text-decoration: none; color: #1a1a2e; }
+#TOC a::after {
+    content: leader(".") target-counter(attr(href), page);
+    color: #999;
+}
+
+/* Admonitions */
+.note, .warning, .tip {
+    border-radius: 6pt;
+    padding: 12pt 16pt;
+    margin: 16pt 0;
+    page-break-inside: avoid;
+}
+
+.note { background: #e8f0fe; border: 1pt solid #1a73e8; }
+.note::before { content: "📝 Note: "; font-weight: 600; color: #1a73e8; }
+
+.warning { background: #fef3cd; border: 1pt solid #f0ad4e; }
+.warning::before { content: "⚠️ Warning: "; font-weight: 600; color: #f0ad4e; }
+
+.tip { background: #e8f5e9; border: 1pt solid #4caf50; }
+.tip::before { content: "💡 Tip: "; font-weight: 600; color: #4caf50; }
+
+/* Chapter header */
+.chapter-header {
+    text-align: center;
+    margin: 48pt 0;
+    page-break-before: always;
+}
+
+.chapter-number { font-size: 10pt; color: #999; text-transform: uppercase; letter-spacing: 2pt; }
+.chapter-title { font-size: 28pt; color: #1a1a2e; margin: 8pt 0; }
+
+/* Footer note */
+.footer-note {
+    font-size: 8pt;
+    color: #999;
+    text-align: center;
+    margin-top: 36pt;
+    border-top: 1pt solid #ddd;
+    padding-top: 12pt;
+}
+
+/* Image placeholder */
+.img-placeholder {
+    border: 1pt dashed #ddd;
+    border-radius: 6pt;
+    padding: 40pt;
+    text-align: center;
+    color: #999;
+    margin: 16pt 0;
+    page-break-inside: avoid;
+}
+
+/* Command blocks */
+.cmd-block {
+    background: #1e1e1e;
+    color: #d4d4d4;
+    border-radius: 6pt;
+    padding: 10pt 12pt;
+    font-family: monospace;
+    font-size: 9pt;
+    margin: 8pt 0;
+    page-break-inside: avoid;
+}
+
+.cmd-block .prompt { color: #6a9955; }
+.cmd-block .command { color: #d4d4d4; }
+.cmd-block .output { color: #9cdcfe; }
+
+/* Metadata table on title page */
+.meta-table { width: 60%; margin: 24pt auto; border-collapse: collapse; }
+.meta-table td { padding: 6pt 12pt; border-bottom: 1pt solid #ddd; font-size: 11pt; }
+.meta-table td:first-child { font-weight: 600; color: #555; width: 30%; }

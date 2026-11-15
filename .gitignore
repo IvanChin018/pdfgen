@@ -1,0 +1,47 @@
+# Binaries
+/bin/
+/tmp/
+*.exe
+pdfgen
+
+# Build artifacts
+/dist/
+/.release/
+checksums.txt
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+build-errors.log
+
+# Test output
+/testdata/output/
+*.pdf
+
+# Environment
+.env
+.env.local
+
+# Go
+vendor/
+go.work
+
+# Air
+.air.toml.bak
+
+# Coverage
+coverage.out
+coverage.html
+
+# Profiling
+cpu.prof
+mem.prof
